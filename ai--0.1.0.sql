@@ -50,7 +50,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 from datetime import datetime, timezone
 for model in client.models.list():
     created = datetime.fromtimestamp(model.created, timezone.utc)
@@ -80,7 +80,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -118,7 +118,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -152,7 +152,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -200,7 +200,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 import json
 
 _messages_1 = json.loads(_messages)
@@ -268,7 +268,7 @@ if _api_key_1 is None:
 if _api_key_1 is None:
     plpy.error("missing api key")
 import openai
-client = openai.OpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1)
 moderation = client.moderations.create(input=_input, model=_model)
 return moderation.model_dump_json()
 $func$
