@@ -35,7 +35,10 @@ set search_path to pg_catalog, pg_temp
 -- openai_list_models
 -- list models supported on the openai platform
 -- https://platform.openai.com/docs/api-reference/models/list
-create function @extschema@.openai_list_models(_api_key text default null)
+create function @extschema@.openai_list_models(
+  _api_key text default null,
+  _deployment text default null,
+)
 returns table
 ( id text
 , created timestamptz
@@ -48,7 +51,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 from datetime import datetime, timezone
 for model in client.models.list():
     created = datetime.fromtimestamp(model.created, timezone.utc)
@@ -68,6 +71,7 @@ create function @extschema@.openai_embed
 , _api_key text default null
 , _dimensions int default null
 , _user text default null
+, _deployment text default null
 ) returns vector
 as $func$
 _api_key_1 = _api_key
@@ -76,7 +80,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -101,6 +105,7 @@ create function @extschema@.openai_embed
 , _api_key text default null
 , _dimensions int default null
 , _user text default null
+, _deployment text default null
 ) returns table
 ( "index" int
 , embedding @extschema:vector@.vector
@@ -112,7 +117,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -136,6 +141,7 @@ create function @extschema@.openai_embed
 , _api_key text default null
 , _dimensions int default null
 , _user text default null
+, _deployment text default null
 ) returns @extschema:vector@.vector
 as $func$
 _api_key_1 = _api_key
@@ -144,7 +150,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 args = {}
 if _dimensions is not None:
   args["dimensions"] = _dimensions
@@ -182,6 +188,7 @@ create function @extschema@.openai_chat_complete
 , _tools jsonb default null
 , _tool_choice jsonb default null
 , _user text default null
+, _deployment text default null
 ) returns jsonb
 as $func$
 _api_key_1 = _api_key
@@ -190,7 +197,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 import json
 
 _messages_1 = json.loads(_messages)
@@ -248,6 +255,7 @@ create function @extschema@.openai_moderate
 ( _model text
 , _input text
 , _api_key text default null
+, _deployment text default null
 ) returns jsonb
 as $func$
 _api_key_1 = _api_key
@@ -256,7 +264,7 @@ if _api_key_1 is None:
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
 import openai
-client = openai.AzureOpenAI(api_key=_api_key_1)
+client = openai.AzureOpenAI(api_key=_api_key_1, azure_deployment=_deployment)
 moderation = client.moderations.create(input=_input, model=_model)
 return moderation.model_dump_json()
 $func$
