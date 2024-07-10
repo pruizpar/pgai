@@ -37,7 +37,7 @@ set search_path to pg_catalog, pg_temp
 -- https://platform.openai.com/docs/api-reference/models/list
 create function @extschema@.openai_list_models(
   _api_key text default null,
-  _deployment text default null,
+  _deployment text default null
 )
 returns table
 ( id text
