@@ -47,8 +47,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 from datetime import datetime, timezone
@@ -77,8 +75,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
@@ -115,8 +111,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
@@ -149,8 +143,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 args = {}
@@ -197,8 +189,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 import json
@@ -265,8 +255,6 @@ if _api_key_1 is None:
     r = plpy.execute("select pg_catalog.current_setting('ai.openai_api_key', true) as api_key")
     if len(r) >= 0:
         _api_key_1 = r[0]["api_key"]
-if _api_key_1 is None:
-    plpy.error("missing api key")
 import openai
 client = openai.AzureOpenAI(api_key=_api_key_1)
 moderation = client.moderations.create(input=_input, model=_model)
